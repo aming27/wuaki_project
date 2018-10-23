@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+     flaskdb:
+        image: library/mysql:5.7
+        command: '--ignore-db-dir=lost+found'       
+        ports:     
+         - "3306:3306"   
+        env_file:     
+         - '.env.db'
+        volumes:
+         - mysqldatawuaki:/var/lib/mysql/
+         - ../db:/tmp/backup
+        networks:
+         - wuaki
+     flask:
+        image: appswuaki
+        build: .
+        environment:
+         - FLASK_APP=app.py
+        ports:     
+         - "5000:5000"
+        env_file:
+         - '.env.db'
+        depends_on:
+         - flaskdb 
+        networks:
+         - wuaki
+
+networks:
+  wuaki:
+    driver: bridge
+volumes:
+  mysqldatawuaki:
+
