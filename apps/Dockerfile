@@ -15,7 +15,7 @@ RUN set -x; \
         && apt-get update \
 	&& pip install --upgrade pip 
 
-COPY appy.py /code
+COPY . /code
 WORKDIR /code
 RUN pip install -r requirements.txt
 CMD ["python", "-m","flask","run","--host=0.0.0.0"]

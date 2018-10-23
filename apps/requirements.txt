@@ -1,0 +1,5 @@
+setuptools==40.4.3
+flask==0.12
+PyMySQL
+Flask-MySQL==1.4.0
+redis
